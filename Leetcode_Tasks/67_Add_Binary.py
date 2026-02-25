@@ -54,5 +54,31 @@ class Solution:
             result += '1'
         return result[::-1]
 
+    def addBinaryV4(self, a: str, b: str):
+        count = 0
+        result =''
+        for i,j in zip_longest(reversed(a),reversed(b), fillvalue='0'):
+            if count == 1:
+                if i == j == '1':
+                    result += '1'
+                    count = 1
+                elif i == '1' or j == '1':
+                    result += '0'
+                    count = 1
+                else:
+                    result += '1'
+                    count = 0
+            else:
+                if i == j == '1':
+                    result += '0'
+                    count = 1
+                elif i == '1' or j == '1':
+                    result += '1'
+                else:
+                    result += '0'
+        if count == 1:
+            result += '1'
+        return result[::-1]
 # print(Solution().addBinary('11', '1'))
-print(Solution().addBinaryV3('1010', '1011'))
+# print(Solution().addBinaryV3('1010', '1010'))
+print(Solution().addBinaryV4('1', '111'))
