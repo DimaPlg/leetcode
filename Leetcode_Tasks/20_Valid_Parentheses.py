@@ -22,8 +22,6 @@ class ValidParentheses:
         return len(left_brackets)==0
 
 
-
-
 print(ValidParentheses().isValid("()[]{}"))
 print(ValidParentheses().isValid("([])"))
 print(ValidParentheses().isValid("){"))
