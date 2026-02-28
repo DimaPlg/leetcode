@@ -13,8 +13,32 @@ class Palindrome:
                             index_of_palindrome[0],index_of_palindrome[1] = i,j
         return s[index_of_palindrome[0]:index_of_palindrome[1] + 1]
 
+    def longestPalindromev2(self, s: str) -> str:
+        length = len(s)
+        res = [0,0]
+
+        for i in range(length):
+            # Odd length palindrome
+            st = end = i
+            while st > -1 and end < length and s[st] == s[end]:
+                st -= 1
+                end += 1
+            temp = [st + 1,end]
+            if temp[1] - temp[0] > res[1] - res[0]:
+                res = temp
+
+            # Even length palindrome
+            st, end = i, i + 1
+            while st >= 0 and end < length and s[st] == s[end]:
+                st -= 1
+                end += 1
+            temp = [st + 1,end]
+            if temp[1] - temp[0] > res[1] - res[0]:
+                res = temp
+
+        return s[res[0]:res[1]+1]
 
 # print(Palindrome().longestPalindrome("babad"))
 # print(Palindrome().longestPalindrome("cbbd"))
 # print(Palindrome().longestPalindrome("abbcccba"))
-print(Palindrome().longestPalindrome("xaabacxcabaaxcabaax"))
+print(Palindrome().longestPalindromev2("xaabacxcabaaxcabaax"))
