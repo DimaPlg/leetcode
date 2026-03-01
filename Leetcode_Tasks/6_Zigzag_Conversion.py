@@ -33,6 +33,25 @@ class ZigzagConv:
             position += 2 * numRows - 2
         return ''.join(res_list)
 
+    def convertV2(self, s: str, numRows: int) -> str:
+        if numRows == 1 or numRows >= len(s):
+            return s
+
+        res_arr = [''] * numRows
+        index, step = 0, 1
+
+        for x in s:
+            res_arr[index] += x
+            if index == 0:
+                step = 1
+            elif index == numRows - 1:
+                step = -1
+            index += step
+
+        return ''.join(res_arr)
+
+
+
 class TestZigzagConv(unittest.TestCase):
     def test_convert(self):
         self.assertEqual(ZigzagConv().convert('PAYPALISHIRING', 3), 'PAHNAPLSIIGYIR')
@@ -41,7 +60,10 @@ class TestZigzagConv(unittest.TestCase):
         self.assertEqual(ZigzagConv().convert('AB', 2), 'AB')
         self.assertEqual(ZigzagConv().convert('ABCD', 3), 'ABDC')
 
+        self.assertEqual(ZigzagConv().convert('PAYPALISHIRING', 4),
+                         ZigzagConv().convertV2('PAYPALISHIRING', 4))
+        self.assertEqual(ZigzagConv().convert('ABCD', 3),
+                         ZigzagConv().convertV2('ABCD', 3))
+
 if __name__ == '__main__':
     unittest.main()
-
-
