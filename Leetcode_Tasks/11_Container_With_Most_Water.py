@@ -3,6 +3,10 @@
 # Find two lines that together with the x-axis form a container, such that the container contains the most water.
 # Return the maximum amount of water a container can store.
 # Notice that you may not slant the container.
+# n == height.length
+# 2 <= n <= 105
+# 0 <= height[i] <= 104
+import unittest
 from typing import List
 
 
@@ -35,19 +39,48 @@ class ContainerWithMostWater:
 
         max_area = area(right_board, left_board)
         while left_board < right_board:
-            if area(right_board - 1, left_board) > max_area:
-                max_area = area(right_board - 1, left_board)
-                right_board -= 1
-            elif area(right_board, left_board + 1) > max_area:
-                max_area = area(right_board, left_board + 1)
-                left_board +=1
+            if (area(right_board - 1, left_board) > area(right_board, left_board + 1) and
+                    area(right_board - 1, left_board) > max_area):
+                    max_area = area(right_board - 1, left_board)
+                    right_board -= 1
+
+            elif (area(right_board - 1, left_board) < area(right_board, left_board + 1) and
+                  area(right_board, left_board + 1) > max_area):
+                    max_area = area(right_board, left_board + 1)
+                    left_board +=1
             else:
-                right_board -= 1
-                left_board += 1
+                if height[left_board] > (height[right_board] - 1):
+                    right_board -= 1
+                else:
+                    left_board += 1
 
         return max_area
 
+    def maxAreaV3(self, height: List[int]) -> int:
+        max_area = 0
+        length = len(height)
+        left_board, right_board = 0, length -1
+        while left_board < right_board:
+            max_area = max(max_area, min(height[left_board],height[right_board]) * (right_board - left_board))
+            if height[left_board] > height[right_board]:
+                right_board -= 1
+            else:
+                left_board += 1
+        return max_area
+
+class TestContainerWithMostWater(unittest.TestCase):
+    def test_maxArea(self):
+        date_cases = [[[1,8,6,2,5,4,8,3,7], 49], [[1,1], 1], [[1,2,3,1000,9], 9], [[1,3,2,5,25,24,5], 24]]
+        for date, result in date_cases:
+            
+            self.assertEqual(ContainerWithMostWater().maxArea(date), result)
+
+            self.assertEqual(ContainerWithMostWater().maxAreaV2(date), result)
+
+            self.assertEqual(ContainerWithMostWater().maxAreaV3(date), result)
 
 
 
-print(ContainerWithMostWater().maxAreaV2([1,8,6,2,5,4,8,3,7]))
+if __name__ == '__main__':
+    unittest.main()
+
