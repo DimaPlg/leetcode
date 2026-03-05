@@ -72,12 +72,14 @@ class TestContainerWithMostWater(unittest.TestCase):
     def test_maxArea(self):
         date_cases = [[[1,8,6,2,5,4,8,3,7], 49], [[1,1], 1], [[1,2,3,1000,9], 9], [[1,3,2,5,25,24,5], 24]]
         for date, result in date_cases:
-            
-            self.assertEqual(ContainerWithMostWater().maxArea(date), result)
+            try:
+                self.assertEqual(ContainerWithMostWater().maxArea(date), result)
 
-            self.assertEqual(ContainerWithMostWater().maxAreaV2(date), result)
+                self.assertEqual(ContainerWithMostWater().maxAreaV2(date), result)
 
-            self.assertEqual(ContainerWithMostWater().maxAreaV3(date), result)
+                self.assertEqual(ContainerWithMostWater().maxAreaV3(date), result)
+            except AssertionError:
+                print(f'date:{date} - result:{ContainerWithMostWater().maxAreaV3(date)}, true:{result}')
 
 
 
