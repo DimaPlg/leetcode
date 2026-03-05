@@ -75,17 +75,17 @@ class TestContainerWithMostWater(unittest.TestCase):
             try:
                 self.assertEqual(ContainerWithMostWater().maxArea(date), result)
             except AssertionError:
-                print(f'date:{date} - result:{ContainerWithMostWater().maxArea(date)}, true:{result}')
+                print(f'Solution 1:date:{date} - result:{ContainerWithMostWater().maxArea(date)}, true:{result}')
 
             try:
                 self.assertEqual(ContainerWithMostWater().maxAreaV2(date), result)
             except AssertionError:
-                print(f'date:{date} - result:{ContainerWithMostWater().maxAreaV2(date)}, true:{result}')
+                print(f'Solution 2:date:{date} - result:{ContainerWithMostWater().maxAreaV2(date)}, true:{result}')
 
             try:
                 self.assertEqual(ContainerWithMostWater().maxAreaV3(date), result)
             except AssertionError:
-                print(f'date:{date} - result:{ContainerWithMostWater().maxAreaV3(date)}, true:{result}')
+                print(f'Solution 3:date:{date} - result:{ContainerWithMostWater().maxAreaV3(date)}, true:{result}')
 
 
 
